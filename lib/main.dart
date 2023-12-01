@@ -10,6 +10,7 @@ import 'package:gold_application_project/Alerts.dart';
 import 'package:gold_application_project/Contact.dart';
 import 'package:gold_application_project/LiveChart.dart';
 import 'package:gold_application_project/Splash.dart';
+import 'package:gold_application_project/UserProvider.dart';
 import 'package:gold_application_project/aboutpage.dart';
 import 'package:gold_application_project/noti.dart';
 import 'package:gold_application_project/pop_Dialog.dart';
@@ -18,6 +19,7 @@ import 'package:web_socket_channel/io.dart';
 import 'Whatapplauncher.dart';
 import 'constant.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,18 +36,21 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      designSize: const Size(430, 930),
-      builder: (context, child) => MaterialApp(
-        builder: (context, child) {
-          final mediaQueryData = MediaQuery.of(context);
-          final scale = mediaQueryData.copyWith(textScaleFactor: 1.0);
-          return MediaQuery(
-            child: child!,
-            data: scale,
-          );
-        },
-        home: const SplashScreen(),
+    return MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => RateData())],
+      child: ScreenUtilInit(
+        designSize: const Size(430, 930),
+        builder: (context, child) => MaterialApp(
+          builder: (context, child) {
+            final mediaQueryData = MediaQuery.of(context);
+            final scale = mediaQueryData.copyWith(textScaleFactor: 1.0);
+            return MediaQuery(
+              child: child!,
+              data: scale,
+            );
+          },
+          home: const SplashScreen(),
+        ),
       ),
     );
   }
@@ -128,23 +133,24 @@ class _MyHomePageState extends State<MyHomePage> {
                 double.parse(data["conversionRate"].toStringAsFixed(3));
 
             if (data['symbol'] == "XAU/USD") {
-              var temp;
+              double temp;
               temp = data["bid"];
-              currentGoldBID = temp.toString();
-              currentGoldASK = (temp + 1).toString();
+              currentGoldBID = temp.toStringAsFixed(2);
+              // context.read<RateData>().changeData(cGB: temp.toString());
+              currentGoldASK = (temp + 0.5).toStringAsFixed(2);
 
-              DayhighG = (data["high"]).toString();
-              DaylowG = (data["low"]).toString();
+              DayhighG = (data["high"]).toStringAsFixed(2);
+              DaylowG = (data["low"]).toStringAsFixed(2);
               GColStatus = data["goldStatus"];
             }
 
             if (data['symbol'] == "XAG/USD") {
               double temp;
               temp = data["bid"];
-              currentSilverBID = temp.toString();
-              currentSilverASK = (temp + 1).toString();
-              DayHighS = (data["high"]).toString();
-              DayLowS = (data["low"]).toString();
+              currentSilverBID = temp.toStringAsFixed(2);
+              currentSilverASK = (temp + 0.05).toStringAsFixed(2);
+              DayHighS = (data["high"]).toStringAsFixed(2);
+              DayLowS = (data["low"]).toStringAsFixed(2);
 
               SColStatus = data["silverStatus"];
             }

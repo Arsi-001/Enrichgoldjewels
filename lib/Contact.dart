@@ -24,8 +24,8 @@ class _ConatctState extends State<Conatct> {
   String Email = "";
   String Message = "";
 
-  void LaunchDialer() async {
-    var tel = "tel:+971504569709";
+  void LaunchDialer(String phonenumber) async {
+    var tel = "tel:$phonenumber";
 
     await launchUrl(Uri.parse(tel), mode: LaunchMode.externalApplication);
   }
@@ -85,7 +85,7 @@ class _ConatctState extends State<Conatct> {
                             Container(
                               padding: EdgeInsets.symmetric(
                                   vertical: 20.h, horizontal: 15.w),
-                              height: 120.h,
+                              height: 140.h,
                               decoration: BoxDecoration(
                                   color: Color.fromARGB(129, 0, 0, 0),
                                   border: Border.all(color: goldtheme),
@@ -100,11 +100,11 @@ class _ConatctState extends State<Conatct> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "ADDRESS :",
+                                        " Address :",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontFamily: 'Montserrat',
-                                            fontSize: 14.sp),
+                                            fontSize: 12.sp),
                                       ),
                                       GestureDetector(
                                         onTap: () => LaunchSocials("Address"),
@@ -114,39 +114,60 @@ class _ConatctState extends State<Conatct> {
                                           style: TextStyle(
                                               color: goldtheme,
                                               fontFamily: 'Montserrat',
-                                              fontSize: 13.sp),
+                                              fontSize: 12.sp),
                                         ),
                                       )
                                     ],
                                   ),
+                                  Spacer(),
                                   Row(
                                     children: [
                                       Text(
-                                        "      EMAIL :",
+                                        "      Email : ",
                                         style: TextStyle(
                                             color: Colors.white,
                                             fontFamily: 'Montserrat',
-                                            fontSize: 14.sp),
+                                            fontSize: 12.sp),
+                                      ),
+                                      Text(
+                                        "info@enrichgoldjewels.com",
+                                        style: TextStyle(
+                                            color: goldtheme,
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 12.sp),
+                                      ),
+                                    ],
+                                  ),
+                                  Spacer(),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Landline : ",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontFamily: 'Montserrat',
+                                            fontSize: 12.sp),
                                       ),
                                       GestureDetector(
-                                        onTap: () => SendEmail("", "", ""),
+                                        onTap: () =>
+                                            LaunchDialer("+97142248886"),
                                         child: Text(
-                                          " info@enrichgoldjewels.com",
+                                          "+971  4  224 8886",
                                           style: TextStyle(
                                               color: goldtheme,
                                               fontFamily: 'Montserrat',
-                                              fontSize: 14.sp),
+                                              fontSize: 12.sp),
                                         ),
-                                      )
+                                      ),
                                     ],
                                   )
                                 ],
                               ),
                             ),
                             Container(
-                              height: 60.h,
+                              height: 70.h,
                               padding: EdgeInsets.symmetric(
-                                  vertical: 10.h, horizontal: 10.w),
+                                  vertical: 12.h, horizontal: 10.w),
                               decoration: BoxDecoration(
                                   color: Color.fromARGB(129, 0, 0, 0),
                                   border: Border.all(color: goldtheme),
@@ -157,40 +178,35 @@ class _ConatctState extends State<Conatct> {
                                     MainAxisAlignment.spaceEvenly,
                                 children: [
                                   Expanded(
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        LaunchDialer();
-                                      },
-                                      child: Icon(
-                                        Icons.call,
-                                        color: goldtheme,
+                                    child: Icon(
+                                      Icons.call,
+                                      color: goldtheme,
+                                    ),
+                                  ),
+                                  Spacer(),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () =>
+                                            LaunchDialer("+971506615808"),
+                                        child: Text(
+                                          "+971 50 661 5808",
+                                          style: TextStyle(
+                                              color: goldtheme,
+                                              fontFamily: 'Montserrat',
+                                              fontSize: 16.sp),
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                  SizedBox(
-                                    width: 30.w,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      LaunchDialer();
-                                    },
-                                    child: Text(
-                                      "+971 50 456 9709",
-                                      style: TextStyle(
-                                          color: goldtheme,
-                                          fontFamily: 'Montserrat',
-                                          fontSize: 16.sp),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 60.w,
-                                  ),
+                                  Spacer(),
                                   Text(
                                     "10AM-8PM",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontFamily: 'Montserrat',
-                                        fontSize: 15.sp),
+                                        fontSize: 14.sp),
                                   )
                                 ],
                               ),
@@ -281,7 +297,7 @@ class _ConatctState extends State<Conatct> {
                                 style: TextStyle(
                                     color: goldtheme,
                                     fontFamily: 'Montserrat',
-                                    fontSize: 20.sp),
+                                    fontSize: 12.sp),
                               ),
                             ),
                             Row(
@@ -436,7 +452,7 @@ class CrudinfoTextfield extends StatelessWidget {
           decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hinttxt,
-              hintStyle: TextStyle(color: colth, fontSize: 16.sp),
+              hintStyle: TextStyle(color: colth, fontSize: 12.sp),
               contentPadding:
                   EdgeInsets.symmetric(vertical: 0, horizontal: 10.w),
               errorMaxLines: 1,

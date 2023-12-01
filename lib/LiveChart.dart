@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:gold_application_project/UserProvider.dart';
 import 'package:gold_application_project/constant.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:unicons/unicons.dart';
 import 'header.dart';
 
@@ -36,22 +38,16 @@ class _LivechartState extends State<Livechart>
       GCol = Colors.red;
     } else if (Gstatus == "1") {
       GCol = Colors.green;
-    } else {
-      GCol = Colors.black;
     }
 
     if (Sstatus == "-1") {
       SCol = Colors.red;
     } else if (Sstatus == "1") {
       SCol = Colors.green;
-    } else {
-      SCol = Colors.black;
     }
     Future.delayed(Duration(milliseconds: 500), () {
-      setState(() {
-        GCol = Colors.black;
-        SCol = Colors.black;
-      });
+      GCol = Colors.black;
+      SCol = Colors.black;
     });
   }
 
@@ -72,13 +68,13 @@ class _LivechartState extends State<Livechart>
   }
 
   late Timer _dataUpdateTimer;
+
   @override
   void initState() {
     super.initState();
-    _dataUpdateTimer = Timer.periodic(Duration(seconds: 1), (timer) {
-      setState(() {
-        changeRateStateCol(GColStatus, SColStatus);
-      });
+    _dataUpdateTimer = Timer.periodic(Duration(milliseconds: 1100), (timer) {
+      setState(() {});
+      changeRateStateCol(GColStatus, SColStatus);
     });
     _animationController = AnimationController(
       vsync: this,
@@ -89,6 +85,7 @@ class _LivechartState extends State<Livechart>
   @override
   void dispose() {
     _dataUpdateTimer.cancel();
+
     _animationController.dispose();
     super.dispose();
   }
@@ -247,7 +244,7 @@ class _LivechartState extends State<Livechart>
                                 children: [
                                   listgoldinfobubble(
                                     barCol: GCol,
-                                    heading: "GOLD BAR (995)",
+                                    heading: "GOLD BAR (.995)",
                                     Weighttxt: "1-KILOGRAM",
                                     barVal: (1 *
                                             995 /
@@ -565,6 +562,7 @@ class BigBubble extends StatelessWidget {
                   children: [
                     Text(
                       "\$" + "$askratetxt",
+                      // context.watch<RateData>().currentBIDgold,
                       style: TextStyle(
                           color: txtCol,
                           fontSize: 36.sp,
